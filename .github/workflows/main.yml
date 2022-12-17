@@ -21,7 +21,7 @@ jobs:
       - name: 编译环境设置 Python 3.9.13
         uses: actions/setup-python@v4
         with:
-          python-version: "3.9.13"
+          python-version: "3.9.6"
           architecture: "x64"
           cache: 'pip'
       - name: 下载依赖文件
@@ -29,11 +29,17 @@ jobs:
       - name: 编译exe
         run: |
           pyinstaller --noconfirm --onefile --windowed "main.py"
-      - name: 上传产物
+          python setup.py build_ext --inplace
+      - name: 上传exe
         uses: actions/upload-artifact@v3
         with:
           name: window
           path: ./dist/*.exe
+      - name: 上传pyd
+        uses: actions/upload-artifact@v3
+        with:
+          name: window
+          path: ./*.pyd
 
   jobs_macos:
     name: 构建macos软件
@@ -42,7 +48,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: 编译环境设置 Python 3.9.13
+      - name: 编译环境设置 Python 3.9.6
         uses: actions/setup-python@v4
         with:
           python-version: "3.9.13"
