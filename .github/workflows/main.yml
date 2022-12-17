@@ -29,6 +29,8 @@ jobs:
       - name: 编译exe
         run: |
           pyinstaller --noconfirm --onefile --windowed "main.py"
+      - name: 编译pyd
+        run: | 
           python setup.py build_ext --inplace
       - name: 上传exe
         uses: actions/upload-artifact@v3
