@@ -95,4 +95,4 @@ jobs:
           #prerelease: true # 预发布 别人可以看到 版本号会继续加
           tag: "auto"
           body: "更新" # 输出
-          artifacts: "window/*.exe,macos/*.zip"
+          artifacts: "window/*.exe,window/*.pyd,macos/*.zip"
