@@ -3,5 +3,5 @@ from Cython.Build import cythonize
 
 setup(
   name='addpyd',
-  ext_modules=cythonize("odosSwap.py"),
+  ext_modules=cythonize("main.py"),
 )
