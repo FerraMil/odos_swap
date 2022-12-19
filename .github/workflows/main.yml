@@ -23,9 +23,15 @@ jobs:
         with:
           python-version: "3.9.13"
           architecture: "x64"
-          cache: 'pip'
-          run: 
-            pip install -r requirements.txt
+      - name: 缓存加载
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('**/requirements.txt') }}
+      - name: 安装依赖
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: pip install -r requirements.txt
       - name: 编译exe
         run: |
           pyinstaller --noconfirm --onefile --windowed "main.py"
@@ -55,8 +61,15 @@ jobs:
         with:
           python-version: "3.9.13"
           architecture: "x64"
-          cache: 'pip'
-          run: pip install -r requirements.txt
+      - name: 缓存加载
+        uses: actions/cache@v2
+        id: cache
+        with:
+          path: ${{ env.pythonLocation }}
+          key: ${{ runner.os }}-python-${{ env.pythonLocation }}-${{ hashFiles('**/requirements.txt') }}
+      - name: 安装依赖
+        if: steps.cache.outputs.cache-hit != 'true'
+        run: pip install -r requirements.txt
       - name: 编译 MacOS.app
         run: |
           pyinstaller -F -w "main.py"
