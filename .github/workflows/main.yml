@@ -29,9 +29,9 @@ jobs:
         id: cache
         with:
           path: ~/.cache/pip
-#           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
-#           restore-keys: |
-#             ${{ runner.os }}-pip-
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}
+          restore-keys: |
+            ${{ runner.os }}-pip-
       - name: 下载依赖文件
         if: steps.cache.outputs.cache-hit != 'true'
         run: pip install -r requirements.txt
