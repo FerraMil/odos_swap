@@ -24,16 +24,8 @@ jobs:
           python-version: "3.9.13"
           architecture: "x64"
           cache: 'pip'
-      - name: 加载缓存依赖
-        uses: actions/cache@v2
-        id: cache
-        with:
-          path: ~/.cache/pip
-          key: setup-python-Windows-python-3.9.13-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: setup-python-Windows-python-3.9.13-pip-
-      - name: 下载依赖文件
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: pip install -r requirements.txt
+          run: 
+            pip install -r requirements.txt
       - name: 编译exe
         run: |
           pyinstaller --noconfirm --onefile --windowed "main.py"
@@ -64,16 +56,7 @@ jobs:
           python-version: "3.9.13"
           architecture: "x64"
           cache: 'pip'
-      - name: 加载缓存依赖
-        uses: actions/cache@v2
-        id: cache
-        with:
-          path: ~/.cache/pip
-          key: setup-python-macOS-python-3.9.13-pip-${{ hashFiles('**/requirements.txt') }}
-          restore-keys: setup-python-macOS-python-3.9.13-pip-
-      - name: 下载依赖文件
-        if: steps.cache.outputs.cache-hit != 'true'
-        run: pip install -r requirements.txt
+          run: pip install -r requirements.txt
       - name: 编译 MacOS.app
         run: |
           pyinstaller -F -w "main.py"
